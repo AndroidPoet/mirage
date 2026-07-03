@@ -5,6 +5,10 @@
   noise fields, and image filters that run entirely on the GPU.
 </p>
 
+<p align="center">
+  <video src="https://github.com/AndroidPoet/mirage/raw/master/art/demo.mp4" width="300" />
+</p>
+
 ## Why Mirage
 
 Beautiful shader backgrounds and image effects usually mean WebGL — not anymore.
