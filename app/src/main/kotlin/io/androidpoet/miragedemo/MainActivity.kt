@@ -30,6 +30,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -63,6 +64,7 @@ class MainActivity : ComponentActivity() {
 private fun ShaderGallery() {
   var selected by remember { mutableStateOf<DemoEntry?>(null) }
   val current = selected
+  val listState = rememberLazyListState()
 
   if (current != null) {
     BackHandler { selected = null }
@@ -83,6 +85,7 @@ private fun ShaderGallery() {
     }
   } else {
     LazyColumn(
+      state = listState,
       modifier = Modifier.fillMaxSize().safeDrawingPadding(),
       contentPadding = PaddingValues(16.dp),
     ) {
