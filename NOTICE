@@ -1,0 +1,7 @@
+Mirage
+Copyright 2026 Ranbir Singh (AndroidPoet)
+
+This product includes shader algorithms derived from the "shaders" project
+by Paper Design (https://github.com/paper-design/shaders), licensed under
+the Apache License, Version 2.0. The original GLSL fragment shaders were
+translated to AGSL (Android Graphics Shading Language) for this library.
