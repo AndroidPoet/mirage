@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <video src="https://github.com/AndroidPoet/mirage/raw/master/art/demo.mp4" width="300" />
+  <video src="https://github.com/AndroidPoet/mirage/raw/master/art/demo.mp4" controls muted width="320"></video>
 </p>
 
 ## Why Mirage
