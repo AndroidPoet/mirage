@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <video src="https://github.com/AndroidPoet/mirage/raw/master/art/demo.mp4" controls muted width="320"></video>
+  <img src="art/demo.gif" width="300" alt="Mirage shaders running on a Pixel 6a" />
 </p>
 
 ## Why Mirage
