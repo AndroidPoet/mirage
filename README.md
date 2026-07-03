@@ -41,6 +41,8 @@ dependencies {
 
 Replace `$version` with the latest version shown on the badge above (currently `0.1.0`).
 
+> 📖 **See the [full Usage Guide](docs/USAGE.md)** for every shader's parameters and code examples.
+
 ## Requirements
 
 Rendering uses `RuntimeShader` (AGSL), which requires **Android 13 (API 33)**. The
