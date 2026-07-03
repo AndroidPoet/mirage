@@ -12,18 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
+import io.androidpoet.mirage.Configuration
+
 plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.compose.compiler)
+  alias(libs.plugins.vanniktech.publish)
 }
 
 android {
-  compileSdk = 35
+  compileSdk = Configuration.COMPILE_SDK
   namespace = "io.androidpoet.mirage"
 
   defaultConfig {
-    minSdk = 21
+    minSdk = Configuration.MIN_SDK
     consumerProguardFiles("consumer-rules.pro")
   }
 
@@ -34,11 +38,23 @@ android {
 
   kotlinOptions {
     jvmTarget = "17"
+    freeCompilerArgs += "-Xexplicit-api=strict"
   }
 
   buildFeatures {
     compose = true
   }
+}
+
+mavenPublishing {
+  configure(
+    AndroidSingleVariantLibrary(
+      variant = "release",
+      sourcesJar = true,
+      publishJavadocJar = true,
+    ),
+  )
+  coordinates(Configuration.GROUP, Configuration.ARTIFACT_ID, Configuration.VERSION)
 }
 
 dependencies {
