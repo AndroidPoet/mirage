@@ -1,0 +1,115 @@
+/*
+ * Designed and developed by 2026 androidpoet (Ranbir Singh)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package io.androidpoet.miragedemo
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import io.androidpoet.miragedemo.ui.theme.MirageDemoTheme
+
+@Composable
+fun App() {
+  MirageDemoTheme {
+    Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+      ShaderGallery()
+    }
+  }
+}
+
+@Composable
+private fun ShaderGallery() {
+  var selected by remember { mutableStateOf<DemoEntry?>(null) }
+  val current = selected
+  val gridState = rememberLazyGridState()
+
+  if (current != null) {
+    Box(Modifier.fillMaxSize()) {
+      current.content()
+      Text(
+        text = "←  ${current.name}",
+        style = MaterialTheme.typography.titleMedium,
+        color = Color.White,
+        modifier =
+        Modifier
+          .align(Alignment.TopStart)
+          .safeDrawingPadding()
+          .padding(16.dp)
+          .clip(RoundedCornerShape(8.dp))
+          .background(Color(0x99000000))
+          .clickable { selected = null }
+          .padding(horizontal = 12.dp, vertical = 6.dp),
+      )
+    }
+  } else {
+    LazyVerticalGrid(
+      columns = GridCells.Adaptive(minSize = 300.dp),
+      state = gridState,
+      modifier = Modifier.fillMaxSize().safeDrawingPadding(),
+      contentPadding = PaddingValues(16.dp),
+      horizontalArrangement = Arrangement.spacedBy(12.dp),
+      verticalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+      items(Registry.all, key = { it.name }) { entry ->
+        Box(
+          Modifier
+            .fillMaxWidth()
+            .height(200.dp)
+            .clip(RoundedCornerShape(20.dp))
+            .clickable { selected = entry },
+        ) {
+          entry.content()
+          Text(
+            text = entry.name,
+            style = MaterialTheme.typography.titleSmall,
+            color = Color.White,
+            modifier =
+            Modifier
+              .align(Alignment.BottomStart)
+              .padding(12.dp)
+              .clip(RoundedCornerShape(6.dp))
+              .background(Color(0x99000000))
+              .padding(horizontal = 10.dp, vertical = 4.dp),
+          )
+        }
+      }
+    }
+  }
+}

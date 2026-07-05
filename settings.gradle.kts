@@ -13,5 +13,5 @@ dependencyResolutionManagement {
   }
 }
 rootProject.name = "Mirage"
-include(":app")
 include(":mirage")
+include(":demo")
